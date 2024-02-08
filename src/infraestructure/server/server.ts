@@ -1,11 +1,27 @@
-import express from 'express'
+import { ApolloServer } from "apollo-server";
+import { typeDefs } from "../typeDefs/typeDefs";
+import { resolvers } from "../resolvers/resolvers";
+
+import { print } from "../../config/Signale";
 
 export class Server {
-    public application: express.Application
-    public json: any
+    public app: ApolloServer
 
-    constructor(){
-        this.application = express()
-        this.json = express.json()
+    constructor() {
+        this.app = new ApolloServer({
+            typeDefs,
+            resolvers,
+            context: () => {
+                return {
+                    name: 'user'
+                }
+            }
+        })
+    }
+
+    async start(port: number) {
+        this.app.listen(port, () => {
+            print.start(`http://localhost:${port}`)
+        })
     }
 }
