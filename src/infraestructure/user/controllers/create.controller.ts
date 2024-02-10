@@ -1,16 +1,16 @@
-import { Create } from '../../../application/use-cases/user/Create'
+import { Create } from "../../../application/use-cases/user/Create";
+
+type createInput = {
+  input: {
+    email: string;
+    password: string;
+  };
+};
+
 export class CreateUserController {
-    constructor(private readonly createUser: Create){}
-    async run(_:any, {input}: {input: {email: string, password: string}}){
-        const {email, password} = input
-        try {
-            const user = await this.createUser.run(email, password)
-            if(!user){
-                throw new Error('El usuario ya esta registrado')
-            }
-            return user
-        } catch (error) {
-            throw new Error('Internal server error')
-        }
-    }
+  constructor(private readonly createUser: Create) {}
+  async run(_: any, { input }: createInput) {
+    const { email, password } = input;
+    return await this.createUser.run(email, password);
+  }
 }

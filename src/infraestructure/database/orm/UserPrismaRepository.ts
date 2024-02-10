@@ -9,7 +9,7 @@ export class UserPrismaRepository implements IUserRepository {
     async create(user: User): Promise<User | null> {
         const exist = await this.prisma.user.findFirst({where:{email: user.email}})
         if(exist){
-            return null
+            throw new Error('this email is already registered')
         }
         const createdUser = await this.prisma.user.create({
             data: {

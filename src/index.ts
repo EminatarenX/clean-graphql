@@ -7,8 +7,8 @@ import { SocketServer } from "./infraestructure/server/socket";
     const frontendUlr = process.env.FRONTEND_URL || 'http://localhost:3000'
 
     const server = new Server()
-    const socketServer = new SocketServer(server, frontendUlr)
     await server.start(port)
+    const socketServer = new SocketServer(server.httpServer, frontendUlr)
     socketServer.start()
     
 })()
