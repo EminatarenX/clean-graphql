@@ -70,6 +70,9 @@ export class RoomPrismaRepository implements IRoomRepository {
             },
             include: {
                 tools: true
+            },
+            orderBy: {
+                createdAt: 'desc'
             }
         })
 

@@ -29,7 +29,7 @@ export class Server {
             origin: [`${process.env.FRONTEND_URL || 'http://localhost:3000'}`]
         }))
         this.httpServer.listen(port, () => {
-            print.start(`http://localhost:4000/apibn d/graphql`)
+            print.start(`http://localhost:4000/api/graphql`)
         })
         
     }
