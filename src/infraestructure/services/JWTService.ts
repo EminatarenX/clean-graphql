@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { IJWTRepository } from '../../../domain/interfaces/IJWTRepository';
+import { IJWTRepository } from '../../domain/interfaces/IJWTRepository';
 
 export class JWTService implements IJWTRepository {
     async sign(payload: any, expiresIn: string): Promise<string> {

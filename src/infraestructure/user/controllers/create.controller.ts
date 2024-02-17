@@ -1,5 +1,5 @@
 import { Create } from "../../../application/user/Create";
-import { Validate } from "../services/decorators";
+import { Validate } from "../../services/decorators";
 
 type createInput = {
   input: {

@@ -1,4 +1,5 @@
-import { createRoomController, findAllRoomsController, findRoomByIdController } from "../room.dependencies"
+import { createRoomController, deleteRoomController, findAllRoomsController, findRoomByIdController } from "../room.dependencies"
+
 
 export const roomResolver = {
     Query: {
@@ -6,6 +7,7 @@ export const roomResolver = {
         findRooms: findAllRoomsController.run.bind(findAllRoomsController)
     },
     Mutation: {
-        createRoom: createRoomController.run.bind(createRoomController)
+        createRoom: createRoomController.run.bind(createRoomController),
+        deleteRoom: deleteRoomController.run.bind(deleteRoomController)
     }
 }

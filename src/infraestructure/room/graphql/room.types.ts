@@ -18,8 +18,13 @@ export const roomTypeDefs = `
         name: String
     }
 
+    input RoomId {
+        roomId: String
+    }
+
     type Mutation {
         createRoom(input: RoomInput): Room
+        deleteRoom(input: RoomId): Boolean
     }
 
     input findRoomInput {

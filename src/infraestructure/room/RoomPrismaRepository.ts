@@ -79,4 +79,24 @@ export class RoomPrismaRepository implements IRoomRepository {
 
         return rooms.map(room => new Room( room.id, room.name, room.userId, room.tools.map(tool => new Tool(tool.id, tool.name, tool.state, tool.roomId))))
     }
+
+    async deleteRoom(roomId: string, userId: string): Promise<boolean | null> {
+        const exist = await this.db.room.findUnique({
+            where: {
+                id: roomId
+            }
+        })
+
+        if(!exist) throw new Error('Room does not exist')
+
+        if(exist.userId !== userId)
+            throw new Error('Unauthorized requested, You have not permission to modify this')
+
+        await this.db.room.delete({
+            where: {id: roomId}, 
+            include: {tools: true}
+        })
+
+        return true
+    }
 }
