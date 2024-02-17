@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { Room } from "../../domain/entities/Room";
-import { IRoomRepository } from "../../domain/interfaces/IRoomRepository";
-import { Tool } from "../../domain/entities/Tool";
+import { Room } from "@/domain/entities/Room";
+import { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
+import { Tool } from "@/domain/entities/Tool";
 
 export class RoomPrismaRepository implements IRoomRepository {
     private db: PrismaClient

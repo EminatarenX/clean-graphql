@@ -1,4 +1,4 @@
-import { FindRoomById } from "../../../application/room/findById";
+import { FindRoomById } from "@/application/room/findById";
 
 type FindRoomByIdInput = {
     input: {

@@ -1,13 +1,13 @@
-import { CreateRoom } from "../../application/room/Create";
-import { FindRoomById } from "../../application/room/findById";
+import { CreateRoom } from "@/application/room/Create";
+import { FindRoomById } from "@/application/room/findById";
 import { CreateRoomController } from "./controller/create.controller";
 import { FindRoomByIdController } from "./controller/findById.controller";
 import { RoomPrismaRepository } from "./RoomPrismaRepository";
 import { JWTService } from "../services/JWTService";
-import { FindAllRooms } from "../../application/room/FindAllRooms";
+import { FindAllRooms } from "@/application/room/FindAllRooms";
 import { FindAllRoomsController } from "./controller/findAllRooms.controller";
 import { DeleteRoomController } from './controller/deleteRoom.controller'
-import { DeleteRoom } from '../../application/room/DeleteRoom'
+import { DeleteRoom } from '@/application/room/DeleteRoom'
 
 const roomRepository = new RoomPrismaRepository()
 const jwtService = new JWTService()

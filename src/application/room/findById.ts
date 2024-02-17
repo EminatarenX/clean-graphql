@@ -1,5 +1,5 @@
-import { IJWTRepository } from "../../domain/interfaces/IJWTRepository";
-import { IRoomRepository } from "../../domain/interfaces/IRoomRepository";
+import { IJWTRepository } from "@/domain/interfaces/IJWTRepository";
+import { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
 export class FindRoomById {
     constructor(
         private readonly roomRepository: IRoomRepository,

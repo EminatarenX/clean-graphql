@@ -1,4 +1,4 @@
-import { IBcryptRepository } from "../../domain/interfaces/IBcryptRepository";
+import { IBcryptRepository } from "@/domain/interfaces/IBcryptRepository";
 import bcrypt from 'bcrypt'
 
 export class BcryptService implements IBcryptRepository {

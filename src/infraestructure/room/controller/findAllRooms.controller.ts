@@ -1,4 +1,4 @@
-import { FindAllRooms } from "../../../application/room/FindAllRooms";
+import { FindAllRooms } from "@/application/room/FindAllRooms";
 type ctxType = {
     ctx: {
         token: string

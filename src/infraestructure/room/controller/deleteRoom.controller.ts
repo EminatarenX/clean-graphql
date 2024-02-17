@@ -1,4 +1,4 @@
-import { DeleteRoom } from "../../../application/room/DeleteRoom";
+import { DeleteRoom } from "@/application/room/DeleteRoom";
 
 export class DeleteRoomController {
     constructor(private readonly deleteUseCase: DeleteRoom){}

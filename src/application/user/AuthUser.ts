@@ -1,6 +1,6 @@
-import { IBcryptRepository } from "../../domain/interfaces/IBcryptRepository"
-import { IUserRepository } from "../../domain/interfaces/IUserRepository"
-import { IJWTRepository } from "../../domain/interfaces/IJWTRepository"
+import { IBcryptRepository } from "@/domain/interfaces/IBcryptRepository"
+import { IUserRepository } from "@/domain/interfaces/IUserRepository"
+import { IJWTRepository } from "@/domain/interfaces/IJWTRepository"
 export class AuthUser {
     constructor(
         private readonly userRepository: IUserRepository, 

@@ -1,4 +1,4 @@
-import { CreateRoom } from "../../../application/room/Create";
+import { CreateRoom } from "@/application/room/Create"
 
 type createRoomInput = {
     input: {

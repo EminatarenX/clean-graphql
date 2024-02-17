@@ -3,7 +3,7 @@ import { typeDefs } from "../graphql/typeDefs";
 import { createServer } from 'node:http'
 import { resolvers } from "../graphql/resolvers";
 import express, { Express, Request} from 'express'
-import { print } from "../../config/Signale";
+import { print } from "@/config/Signale";
 import cors from 'cors'
 
 export class Server {
