@@ -1,6 +1,6 @@
 import { Server } from "./infraestructure/server/server";
 import { SocketServer } from "./infraestructure/server/socket"; 
-require('tsconfig-paths').register();
+// require('tsconfig-paths').register();
 
 (async() => {
     const port: number =  Number(process.env.PORT) || 4000

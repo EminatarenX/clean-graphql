@@ -35,7 +35,7 @@ export class UserPrismaRepository implements IUserRepository {
     }
 
     async findByEmail(email: string): Promise<User | null> {
-        const exist = await this.prisma.user.findFirst({
+        const exist = await this.prisma.user.findUnique({
             where: {
                 email
             }
