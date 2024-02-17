@@ -52,4 +52,22 @@ export class UserPrismaRepository implements IUserRepository {
             exist.updatedAt
         )
     }
+
+    async findById(id: string): Promise<User | null> {
+        const exist = await this.prisma.user.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if(!exist) throw new Error ('Unauthorized request')
+
+        return new User(
+            exist.email,
+            exist.password,
+            exist.id,
+            exist.createdAt,
+            exist.updatedAt
+        )
+    }
 }

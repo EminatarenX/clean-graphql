@@ -18,13 +18,14 @@ export class Server {
         this.app = new ApolloServer({
                 typeDefs,
                 resolvers,
-            context: ({ req, res }) => {
-                
-                return {
-                    ctx: {
-                        id: "9bb34d12-07f9-4a6d-96e3-cfa5b8eeebb6"
-                    }
+                context: ({ req, res }) => {
+                if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+                    const token = req.headers.authorization.split(' ')[1]
+                    return { ctx: {token} }
+                }else {
+                    return { ctx: {token: null} }
                 }
+               
             },
         })
     }

@@ -14,7 +14,7 @@ export class FindRoomByIdController {
 
     async run (_: any, {input}: FindRoomByIdInput, {ctx}: any) {
         const { roomId } = input
-        const { id: userId } = ctx
-        return await this.findById.run(roomId, userId)
+        const { token } = ctx
+        return await this.findById.run(roomId, token)
     }
 }

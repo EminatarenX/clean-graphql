@@ -16,7 +16,6 @@ export const roomTypeDefs = `
 
     input RoomInput {
         name: String
-        userId: String
     }
 
     type Mutation {

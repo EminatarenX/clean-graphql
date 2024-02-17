@@ -12,9 +12,9 @@ export class CreateRoomController {
         private readonly createRoom: CreateRoom
     ){}
 
-    async run(_: any, {input}: createRoomInput){
-        
-        const { name, userId } = input
-        return await this.createRoom.run(name, userId)
+async run(_: any, {input}: createRoomInput, {ctx}: any){
+        const { token } = ctx
+        const { name } = input
+        return await this.createRoom.run(name, token)
     }
 }
