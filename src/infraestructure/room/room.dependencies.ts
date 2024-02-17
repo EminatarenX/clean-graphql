@@ -4,6 +4,8 @@ import { CreateRoomController } from "./controller/create.controller";
 import { FindRoomByIdController } from "./controller/findById.controller";
 import { RoomPrismaRepository } from "./RoomPrismaRepository";
 import { JWTService } from "../user/services/JWTService";
+import { FindAllRooms } from "../../application/room/FindAllRooms";
+import { FindAllRoomsController } from "./controller/findAllRooms.controller";
 const roomRepository = new RoomPrismaRepository()
 const jwtService = new JWTService()
 
@@ -14,3 +16,7 @@ export const createRoomController = new CreateRoomController(createRoomUseCase)
 // findById 
 const findRoomUseCase = new FindRoomById(roomRepository, jwtService)
 export const findRoomByIdController = new FindRoomByIdController(findRoomUseCase)
+
+// findAll
+const findAllRoomsUseCase = new FindAllRooms(roomRepository, jwtService)
+export const findAllRoomsController = new FindAllRoomsController(findAllRoomsUseCase)

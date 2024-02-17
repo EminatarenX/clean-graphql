@@ -61,8 +61,22 @@ export class RoomPrismaRepository implements IRoomRepository {
                     )
                 })
             )
-            
-       
+    }
 
+    async findRooms(userId: string): Promise<Room[] | null> {
+        const rooms = await this.db.room.findMany({
+            where: {
+                userId
+            },
+            include: {
+                tools: true
+            }
+        })
+
+        if(rooms.length === 0) throw new Error('There are no rooms')
+
+        if(rooms[0].userId !== userId) throw new Error('Unauthorized request')
+
+        return rooms.map(room => new Room( room.id, room.name, room.userId, room.tools.map(tool => new Tool(tool.id, tool.name, tool.state, tool.roomId))))
     }
 }
