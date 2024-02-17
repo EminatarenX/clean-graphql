@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@apollo/server": "^4.10.0",
     "@prisma/client": "5.9.1",
     "@types/cors": "^2.8.17",
     "apollo-server": "^3.13.0",

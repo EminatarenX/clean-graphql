@@ -1,6 +1,6 @@
-import { IUserRepository } from "../../../domain/repositories/IUserRepository";
-import { User } from "../../../domain/entities/User";
-import { IBcryptRepository } from "../../../domain/repositories/IBcryptRepository";
+import { IUserRepository } from "../../domain/interfaces/IUserRepository";
+import { User } from "../../domain/entities/User";
+import { IBcryptRepository } from "../../domain/interfaces/IBcryptRepository";
 export class Create {
     constructor(
         private readonly userRepository: IUserRepository,

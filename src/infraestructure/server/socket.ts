@@ -3,11 +3,11 @@ import { Server as socketServer } from "socket.io";
 export class SocketServer {
     private io: socketServer
 
-    constructor(server: any, url: string){
+    constructor(server: any){
         this.io = new socketServer(server, {
             pingTimeout: 60000,
             cors: {
-                origin: url
+                origin: process.env.FRONTEND_URL || 'http://localhost:3000'
             }
 
         })

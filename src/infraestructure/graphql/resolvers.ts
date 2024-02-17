@@ -1,5 +1,7 @@
-import { userResolver } from "../user/resolver/user.resolver";
+import { userResolver } from "../user/graphql/user.resolver";
+import { roomResolver } from "../room/graphql/room.resolver";
 
 export const resolvers = [
-    userResolver
+    userResolver,
+    roomResolver
 ]
