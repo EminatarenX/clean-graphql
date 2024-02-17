@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import { typeDefs } from "../graphql/typeDefs";
 import { createServer } from 'node:http'
 import { resolvers } from "../graphql/resolvers";
-import express, { Express} from 'express'
+import express, { Express, Request} from 'express'
 import { print } from "../../config/Signale";
 import cors from 'cors'
 
@@ -18,15 +18,7 @@ export class Server {
         this.app = new ApolloServer({
                 typeDefs,
                 resolvers,
-                context: ({ req, res }) => {
-                if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
-                    const token = req.headers.authorization.split(' ')[1]
-                    return { ctx: {token} }
-                }else {
-                    return { ctx: {token: null} }
-                }
-               
-            },
+                context: Server.middleware,
         })
     }
 
@@ -40,6 +32,16 @@ export class Server {
             print.start(`http://localhost:4000/graphql`)
         })
         
+    }
+
+    static middleware ({ req }: {req: Request}) {
+        if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+            const token = req.headers.authorization.split(' ')[1]
+            return { ctx: {token} }
+        }else {
+            return { ctx: {token: null} }
+        }
+       
     }
 
 }
