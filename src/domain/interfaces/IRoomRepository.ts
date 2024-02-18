@@ -5,4 +5,5 @@ export interface IRoomRepository {
     findById(id: string, userId: string): Promise< Room | null >;
     findRooms(userId: string): Promise<Room[] | null >;
     deleteRoom(roomId: string, userId: string): Promise<boolean | null>;
+    updateRoom(name: string, roomId: string, userId: string): Promise<Room | null >;
 }

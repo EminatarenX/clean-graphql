@@ -102,4 +102,29 @@ export class RoomPrismaRepository implements IRoomRepository {
 
         return true
     }
+
+    async updateRoom(name: string, roomId: string, userId: string): Promise<Room | null >{
+      const exist = await this.db.room.findUnique({
+          where: {
+              id: roomId  
+          }
+      })
+
+      if(!exist) throw new Error('This room does not exist')
+      
+      if(exist.userId !== userId) throw new Error("Unauthorized request, you don't have any permission");
+
+      const updatedRoom = await this.db.room.update({
+          where: {
+              id: roomId
+          },
+          data: {
+              name
+          }
+      })
+      
+      return new Room(updatedRoom.id, updatedRoom.name, updatedRoom.userId)
+      
+    }
+    
 }
