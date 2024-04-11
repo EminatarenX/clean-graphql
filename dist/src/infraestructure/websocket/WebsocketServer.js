@@ -11,13 +11,21 @@ export class WebSocketServer {
         if (!this.app) {
             this.app = express();
             this.app.use(express.json());
-            this.app.use(cors());
+            this.app.use(cors({
+                origin: [
+                    "http://localhost:3000",
+                    "https://www.bynvm.mx"
+                ]
+            }));
             this.server = this.app.listen(4001, () => {
                 console.log("Server is running on port 4001");
             });
             this.io = new Server(this.server, {
                 cors: {
-                    origin: "*",
+                    origin: [
+                        "http://localhost:3000",
+                        "https://www.bynvm.mx"
+                    ],
                 },
                 pingTimeout: 60000,
             });
