@@ -1,10 +1,10 @@
-import { createRoomController, deleteRoomController, findAllRoomsController, findRoomByIdController, updateRoomController } from "../room.dependencies"
+import { createRoomController, deleteRoomController, findAllRoomsController, findRoomByIdController, updateRoomController } from "../dependencies.js"
 
 
 export const roomResolver = {
   Query: {
     findRoom: findRoomByIdController.run.bind(findRoomByIdController),
-    findRooms: findAllRoomsController.run.bind(findAllRoomsController),
+    findRooms: findAllRoomsController.run.bind(findAllRoomsController)
   },
   Mutation: {
     createRoom: createRoomController.run.bind(createRoomController),

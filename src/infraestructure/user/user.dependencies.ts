@@ -1,10 +1,10 @@
-import { CreateUserController } from "./controllers/create.controller";
-import { UserPrismaRepository } from "./UserPrismaRepository";
-import { Create } from "../../application/user/Create";
-import { BcryptService } from '../services/BcryptService'
-import { JWTService } from "../services/JWTService";
-import { AuthUser } from "@/application/user/AuthUser";
-import { AuthUserController } from "./controllers/auth.controller";
+import { CreateUserController } from "./controllers/createController.js";
+import { UserPrismaRepository } from "./UserPrismaRepository.js";
+import { Create } from "../../application/user/Create.js";
+import { BcryptService } from '../services/BcryptService.js'
+import { JWTService } from "../services/JWTService.js";
+import { AuthUser } from "@/application/user/AuthUser.js";
+import { AuthUserController } from "./controllers/authController.js";
 
 const userRepositoryPrisma = new UserPrismaRepository()
 const bcrypt = new BcryptService()

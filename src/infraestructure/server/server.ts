@@ -1,47 +1,24 @@
-import { ApolloServer } from "apollo-server-express";
-import { typeDefs } from "../graphql/typeDefs";
-import { createServer } from 'node:http'
-import { resolvers } from "../graphql/resolvers";
-import express, { Express, Request} from 'express'
-import { print } from "@/config/Signale";
-import cors from 'cors'
+import { ApolloServer } from "@apollo/server";
+import { typeDefs } from "../graphql/typeDefs.js";
+import { resolvers } from "../graphql/resolvers.js";
+import { print } from "@/config/Signale.js";
+import { startStandaloneServer } from '@apollo/server/standalone'
 
 export class Server {
-    public app: ApolloServer
-    public httpServer: any
-    public appExpress: Express
+  private server: ApolloServer;
+  constructor() {
+    this.server = new ApolloServer({
+      typeDefs,
+      resolvers,
+    });
+  }
 
-    constructor() {
-        this.appExpress = express()
-        this.httpServer = createServer(this.appExpress)
-        
-        this.app = new ApolloServer({
-                typeDefs,
-                resolvers,
-                context: Server.middleware,
-        })
-    }
+  async start() {
+    const { url } = await startStandaloneServer(this.server, {
+      listen: { port: 4000 },
+      context: async ({ req }) => ({ token: req.headers.authorization })
+    });
 
-    async start(port: number) {
-        await this.app.start()
-        this.app.applyMiddleware({app: this.appExpress, path: '/api/graphql'})
-        this.appExpress.use(cors({
-            origin: [`${process.env.FRONTEND_URL || 'http://localhost:3000'}`]
-        }))
-        this.httpServer.listen(port, () => {
-            print.start(`http://localhost:4000/api/graphql`)
-        })
-        
-    }
-
-    static middleware ({ req }: {req: Request}) {
-        if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
-            const token = req.headers.authorization.split(' ')[1]
-            return { ctx: {token} }
-        }else {
-            return { ctx: {token: null} }
-        }
-       
-    }
-
+    print.start(`Server ready at ${url}`);
+  }
 }

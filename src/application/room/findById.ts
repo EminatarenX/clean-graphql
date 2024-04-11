@@ -1,13 +1,19 @@
-import { IJWTRepository } from "@/domain/interfaces/IJWTRepository";
-import { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
+import type { IJWTRepository } from "@/domain/interfaces/IJWTRepository.js";
+import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository.js";
+import type { IMqtt } from "@/domain/interfaces/IMqtt.js";
 export class FindRoomById {
-    constructor(
-        private readonly roomRepository: IRoomRepository,
-        private readonly jwtRepository: IJWTRepository
-    ){}
+  constructor(
+    private readonly roomRepository: IRoomRepository,
+    private readonly jwtRepository: IJWTRepository,
+    private readonly mqttService: IMqtt
+  ) { }
 
-    async run(id: string, token: string) {
-        const { data: userId } = await this.jwtRepository.verify(token)
-        return await this.roomRepository.findById(id, userId)
-    }
+  async run(id: string, token: string) {
+    const { data: userId } = await this.jwtRepository.verify(token)
+    const room = await this.roomRepository.findById(id)
+    if(!room) throw new Error("Room not found, verify the output topic and try again.")
+    if(room.userId !== userId) throw new Error("You are not allowed to access this room.")
+    this.mqttService.subscribe(room.topic_salida)
+    return room
+  }
 }

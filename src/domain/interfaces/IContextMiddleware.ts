@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 export interface IAuthMiddleware {
-    auth(req: Request, res: Response): any;
+  auth(req: any, res: any): any;
 }

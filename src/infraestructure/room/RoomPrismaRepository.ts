@@ -1,130 +1,174 @@
 import { PrismaClient } from "@prisma/client";
 import { Room } from "@/domain/entities/Room";
-import { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
-import { Tool } from "@/domain/entities/Tool";
+import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
 
 export class RoomPrismaRepository implements IRoomRepository {
-    private db: PrismaClient
-    constructor() {
-        this.db = new PrismaClient()
-    }
-    async create(name: string, userId: string): Promise<Room | null> {
-        const exist = await this.db.room.findFirst({
-            where: {
-                userId,
-                name
-            }
-        })
+  private db: PrismaClient;
+  constructor() {
+    this.db = new PrismaClient();
+  }
+  async create(
+    name: string,
+    topic: string,
+    topic_salida: string,
+    userId: string
+  ): Promise<Room | null> {
+    const exist = await this.db.room.findFirst({
+      where: {
+        userId,
+        name,
+        topic,
+      },
+    });
 
-        if(exist) throw new Error('This room already Exist')
+    if (exist) throw new Error("This room already Exist");
 
-        const newRoom = await this.db.room.create({
-            data: {
-                name,
-                userId
-            }
-        })
+    const newRoom = await this.db.room.create({
+      data: {
+        name,
+        topic,
+        salida: topic_salida,
+        userId,
+      },
+    });
 
-        return new Room (
-            newRoom.id,
-            newRoom.name,
-            newRoom.userId
+    return new Room(
+      newRoom.id,
+      newRoom.name,
+      newRoom.topic,
+      newRoom.salida,
+      newRoom.userId
+    );
+  }
+
+  async findById(id: string): Promise<Room | null> {
+    const exist = await this.db.room.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        tools: true,
+      },
+    });
+
+    if (!exist) throw new Error("this room does not exist");
+
+    return new Room(
+      exist.id,
+      exist.name,
+      exist.topic,
+      exist.salida,
+      exist.userId,
+      exist.water
+    );
+  }
+
+  async findRooms(userId: string): Promise<Room[] | null> {
+    const rooms = await this.db.room.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        tools: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    if (rooms.length === 0) throw new Error("There are no rooms");
+
+    if (rooms[0].userId !== userId) throw new Error("Unauthorized request");
+
+    return rooms.map(
+      (room) =>
+        new Room(
+          room.id,
+          room.name,
+          room.topic,
+          room.salida,
+          room.userId,
+          room.water
         )
-    }
+    );
+  }
 
-    async findById(id: string, userId: string): Promise<Room | null> {
-            const exist = await this.db.room.findUnique({
-                where: {
-                    id,
-                },
-                include: {
-                    tools: true
-                }
-            })
-    
-            if(!exist) throw new Error('this room does not exist')
-           
+  async deleteRoom(roomId: string, userId: string): Promise<boolean | null> {
+    const exist = await this.db.room.findUnique({
+      where: {
+        id: roomId,
+      },
+    });
 
-            if(exist.userId !== userId) throw new Error('Unauthorized request')
+    if (!exist) throw new Error("Room does not exist");
 
-    
-            return new Room(
-                exist.id,
-                exist.name,
-                exist.userId,
-                exist.tools?.map(tool => {
-                    return new Tool(
-                        tool.id,
-                        tool.name,
-                        tool.state,
-                        tool.roomId,
-                    )
-                })
-            )
-    }
+    if (exist.userId !== userId)
+      throw new Error(
+        "Unauthorized requested, You have not permission to modify this"
+      );
 
-    async findRooms(userId: string): Promise<Room[] | null> {
-        const rooms = await this.db.room.findMany({
-            where: {
-                userId
-            },
-            include: {
-                tools: true
-            },
-            orderBy: {
-                createdAt: 'desc'
-            }
-        })
+    await this.db.room.delete({
+      where: { id: roomId },
+      include: { tools: true },
+    });
 
-        if(rooms.length === 0) throw new Error('There are no rooms')
+    return true;
+  }
 
-        if(rooms[0].userId !== userId) throw new Error('Unauthorized request')
+  async updateRoom(
+    name: string,
+    topic: string,
+    topic_salida: string,
+    roomId: string,
+    userId: string
+  ): Promise<Room | null> {
+    const exist = await this.db.room.findUnique({
+      where: {
+        id: roomId,
+      },
+    });
 
-        return rooms.map(room => new Room( room.id, room.name, room.userId, room.tools.map(tool => new Tool(tool.id, tool.name, tool.state, tool.roomId))))
-    }
+    if (!exist) throw new Error("This room does not exist");
 
-    async deleteRoom(roomId: string, userId: string): Promise<boolean | null> {
-        const exist = await this.db.room.findUnique({
-            where: {
-                id: roomId
-            }
-        })
+    if (exist.userId !== userId)
+      throw new Error("Unauthorized request, you don't have any permission");
 
-        if(!exist) throw new Error('Room does not exist')
+    const updatedRoom = await this.db.room.update({
+      where: {
+        id: roomId,
+      },
+      data: {
+        name,
+        topic,
+        salida: topic_salida,
+      },
+    });
 
-        if(exist.userId !== userId)
-            throw new Error('Unauthorized requested, You have not permission to modify this')
+    return new Room(
+      updatedRoom.id,
+      updatedRoom.name,
+      updatedRoom.topic,
+      updatedRoom.salida,
+      updatedRoom.userId
+    );
+  }
 
-        await this.db.room.delete({
-            where: {id: roomId}, 
-            include: {tools: true}
-        })
-
-        return true
-    }
-
-    async updateRoom(name: string, roomId: string, userId: string): Promise<Room | null >{
-      const exist = await this.db.room.findUnique({
-          where: {
-              id: roomId  
-          }
+  async findOutTopic(salida: string): Promise<Room | null> {
+      const room = await this.db.room.findFirst({
+        where: {
+          salida
+        }
       })
 
-      if(!exist) throw new Error('This room does not exist')
-      
-      if(exist.userId !== userId) throw new Error("Unauthorized request, you don't have any permission");
+      if(!room) throw new Error("This room does not exist")
 
-      const updatedRoom = await this.db.room.update({
-          where: {
-              id: roomId
-          },
-          data: {
-              name
-          }
-      })
-      
-      return new Room(updatedRoom.id, updatedRoom.name, updatedRoom.userId)
-      
-    }
-    
+      return new Room(
+        room.id,
+        room.name,
+        room.topic,
+        room.salida,
+        room.userId,
+        room.water
+      )
+  }
 }

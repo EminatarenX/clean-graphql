@@ -10,12 +10,17 @@ export const roomTypeDefs = `
         id: ID
         name: String
         userId: String
+        water: Boolean
+        topic: String
+        topic_salida: String
         tools: [Tool]
     }
 
 
     input RoomInput {
         name: String
+        topic: String
+        topic_salida: String
     }
 
     input RoomId {
@@ -24,13 +29,22 @@ export const roomTypeDefs = `
     
     input updateInput {
         name: String
+        topic: String
+        topic_salida: String
         roomId: String
+    }
+
+    type RoomResponse {
+        code: String
+        message: String
+        success: Boolean
+        room: Room
     }
 
     type Mutation {
         createRoom(input: RoomInput): Room
-        deleteRoom(input: RoomId): Boolean 
-        updateRoom(input: updateInput) : Room
+        deleteRoom(input: RoomId): RoomResponse 
+        updateRoom(input: updateInput) : RoomResponse
     }
 
     input findRoomInput {

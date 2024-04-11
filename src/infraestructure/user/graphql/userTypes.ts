@@ -13,13 +13,20 @@ export const userTypeDefs = `
         password: String
     }
 
+    type UserResponse {
+      code: String
+      status: String
+      message: String
+      user: User
+    }
+
     type Mutation {
-        createUser(input: UserInput): User
-        auth(input: UserInput): User
+        createUser(input: UserInput): UserResponse
+        auth(input: UserInput): UserResponse
     }
 
     type Query {
-        auth: String
+        authUser: UserResponse
     }
 
 

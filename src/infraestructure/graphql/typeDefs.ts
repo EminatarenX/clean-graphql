@@ -1,9 +1,11 @@
-import { gql } from "apollo-server";
-import { userTypeDefs } from "../user/graphql/user.types";
-import { roomTypeDefs } from "../room/graphql/room.types";
+import { userTypeDefs } from "../user/graphql/userTypes.js";
+import { roomTypeDefs } from "../room/graphql/roomTypes.js";
+import { typeDefs as toolsTypeDefs } from "../tool/graphql/typeDefs.js";
 
-export const typeDefs = gql`
+export const typeDefs = `
     ${userTypeDefs}
 
     ${roomTypeDefs}
+
+    ${toolsTypeDefs}
 `
