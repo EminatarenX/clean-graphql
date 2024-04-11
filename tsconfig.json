@@ -4,16 +4,15 @@
       "ESNext"
     ],
     "target": "ESNext",
-    "module": "ESNext",
-    // "rootDir": "./",                                 
+    "module": "ESNext",                             
     "moduleResolution": "bundler",
     "allowJs": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+    // "paths": {
+    //   "@/*": [
+    //     "src"
+    //   ]
+    // },
     "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,
     "outDir": "./dist",

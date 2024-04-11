@@ -1,7 +1,6 @@
 import { ApolloServer } from "@apollo/server";
 import { typeDefs } from "../graphql/typeDefs.js";
 import { resolvers } from "../graphql/resolvers.js";
-import { print } from "@/config/Signale.js";
 import { startStandaloneServer } from '@apollo/server/standalone'
 
 export class Server {
@@ -19,6 +18,6 @@ export class Server {
       context: async ({ req }) => ({ token: req.headers.authorization })
     });
 
-    print.start(`Server ready at ${url}`);
+    console.log(`Server ready at ${url}`);
   }
 }

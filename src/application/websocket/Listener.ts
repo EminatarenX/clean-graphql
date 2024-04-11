@@ -1,7 +1,5 @@
-import type { IWebsocketServer } from "@/domain/interfaces/IWebsocketServer.js";
-import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository.js";
-import type { IMqtt } from "@/domain/interfaces/IMqtt.js";
-
+import type { IWebsocketServer } from "../../domain/interfaces/IWebsocketServer.js";
+import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository.js";
 
 export class Listener {
     constructor(

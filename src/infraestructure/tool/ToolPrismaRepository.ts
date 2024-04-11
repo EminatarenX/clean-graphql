@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { Tool } from "@/domain/entities/Tool.js";
-import type { IToolRepository } from "@/domain/interfaces/IToolRepository.js";
+import { Tool } from "../../domain/entities/Tool.js";
+import type { IToolRepository } from "../../domain/interfaces/IToolRepository.js";
 
 export class ToolPrismaRepository implements IToolRepository {
   private db: PrismaClient;

@@ -1,6 +1,7 @@
 import express from "express";
 import { Server, Socket } from "socket.io";
-import type { IWebsocketServer } from "@/domain/interfaces/IWebsocketServer.js";
+import type { IWebsocketServer } from "../../domain/interfaces/IWebsocketServer.js";
+
 import cors from "cors";
 
 export class WebSocketServer implements IWebsocketServer{

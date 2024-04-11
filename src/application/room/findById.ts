@@ -1,6 +1,6 @@
-import type { IJWTRepository } from "@/domain/interfaces/IJWTRepository.js";
-import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository.js";
-import type { IMqtt } from "@/domain/interfaces/IMqtt.js";
+import type { IJWTRepository } from "../../domain/interfaces/IJWTRepository.js";
+import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository.js";
+import type { IMqtt } from "../../domain/interfaces/IMqtt.js";
 export class FindRoomById {
   constructor(
     private readonly roomRepository: IRoomRepository,

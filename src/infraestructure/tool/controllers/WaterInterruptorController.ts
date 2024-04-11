@@ -1,4 +1,4 @@
-import { WaterOnCase } from "@/application/tool/WaterOn.js";
+import { WaterOnCase } from "../../../application/tool/WaterOn.js";
 export class WaterInterruptorController {
   constructor(private readonly createToolUseCase: WaterOnCase) { }
   async run(_parent: any, { input }: any, ctx: any) {

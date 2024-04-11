@@ -1,7 +1,7 @@
-import type { IToolRepository } from "@/domain/interfaces/IToolRepository.js";
-import type { IJWTRepository } from "@/domain/interfaces/IJWTRepository.js";
-import type { IMqtt } from "@/domain/interfaces/IMqtt.js";
-import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
+import type { IToolRepository } from "../../domain/interfaces/IToolRepository.js";
+import type { IJWTRepository } from "../../domain/interfaces/IJWTRepository.js";
+import type { IMqtt } from "../../domain/interfaces/IMqtt.js";
+import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository";
 export class WaterOnCase {
   constructor(
     private readonly toolRepository: IToolRepository, private readonly jwtRepository: IJWTRepository,private readonly mqttService: IMqtt, private readonly roomRepository: IRoomRepository) { }

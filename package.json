@@ -23,7 +23,9 @@
     "ws": "^8.16.0"
   },
   "scripts": {
-    "dev": "bun --watch --clear src/index.ts"
+    "dev": "bun --watch --clear src/index.ts",
+    "build": "tsc",
+    "start": "node dist/src/index.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

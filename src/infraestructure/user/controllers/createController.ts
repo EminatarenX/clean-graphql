@@ -1,4 +1,4 @@
-import { Create } from "@/application/user/Create.js";
+import { Create } from "../../../application/user/Create.js";
 
 type createInput = {
   input: {

@@ -1,5 +1,5 @@
-import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository.js";
-import type { IJWTRepository } from "@/domain/interfaces/IJWTRepository.js";
+import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository.js";
+import type { IJWTRepository } from "../../domain/interfaces/IJWTRepository.js";
 export class UpdateRoomUseCase {
   constructor(
     private readonly roomRepository: IRoomRepository, private readonly jwtRepository: IJWTRepository) { }

@@ -1,4 +1,4 @@
-import { CreateRoom } from "@/application/room/Create.js";
+import { CreateRoom } from "../../../application/room/Create.js";
 
 type createRoomInput = {
   input: {

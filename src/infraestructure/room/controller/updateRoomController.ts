@@ -1,4 +1,4 @@
-import { UpdateRoomUseCase } from "@/application/room/UpdateRoom.js";
+import { UpdateRoomUseCase } from "../../../application/room/UpdateRoom.js";
 export class UpdateRoomController {
   constructor(private readonly updateRoomUseCase: UpdateRoomUseCase) { }
   async run(_parent: any, { input }: any, ctx: any) {

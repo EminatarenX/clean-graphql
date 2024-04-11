@@ -1,7 +1,7 @@
 
 import type { MqttClient } from "mqtt"
 import mqtt from 'mqtt'
-import type { IMqtt } from "@/domain/interfaces/IMqtt.js"
+import type { IMqtt } from "../../domain/interfaces/IMqtt.js"
 import { listenerController } from "../websocket/dependencies.js"
 
 

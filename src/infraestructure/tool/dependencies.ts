@@ -1,4 +1,4 @@
-import { WaterOnCase } from "@/application/tool/WaterOn.js";
+import { WaterOnCase } from "../../application/tool/WaterOn.js";
 import { ToolPrismaRepository } from "./ToolPrismaRepository.js";
 import { MqttService } from "../services/MqttService.js";
 import { JWTService } from "../services/JWTService.js";

@@ -1,4 +1,4 @@
-import { AuthUser } from "@/application/user/AuthUser.js";
+import { AuthUser } from "../../../application/user/AuthUser.js";
 
 type createInput = {
   input: {

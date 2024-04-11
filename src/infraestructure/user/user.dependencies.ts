@@ -3,7 +3,7 @@ import { UserPrismaRepository } from "./UserPrismaRepository.js";
 import { Create } from "../../application/user/Create.js";
 import { BcryptService } from '../services/BcryptService.js'
 import { JWTService } from "../services/JWTService.js";
-import { AuthUser } from "@/application/user/AuthUser.js";
+import { AuthUser } from "../../application/user/AuthUser.js";
 import { AuthUserController } from "./controllers/authController.js";
 
 const userRepositoryPrisma = new UserPrismaRepository()

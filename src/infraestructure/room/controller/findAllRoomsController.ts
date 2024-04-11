@@ -1,4 +1,4 @@
-import { FindAllRooms } from "@/application/room/FindAllRooms.js";
+import { FindAllRooms } from "../../../application/room/FindAllRooms.js";
 export class FindAllRoomsController {
   constructor(private readonly findAllUseCase: FindAllRooms) { }
   async run(_: any, __: any, ctx: any) {

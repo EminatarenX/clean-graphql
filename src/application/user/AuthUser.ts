@@ -1,6 +1,6 @@
-import type { IBcryptRepository } from "@/domain/interfaces/IBcryptRepository.js"
-import type { IUserRepository } from "@/domain/interfaces/IUserRepository.js"
-import type { IJWTRepository } from "@/domain/interfaces/IJWTRepository.js"
+import type { IBcryptRepository } from "../../domain/interfaces/IBcryptRepository.js"
+import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js"
+import type { IJWTRepository } from "../../domain/interfaces/IJWTRepository.js"
 export class AuthUser {
   constructor(
     private readonly userRepository: IUserRepository,

@@ -1,4 +1,4 @@
-import type { IUserRepository } from "@/domain/interfaces/IUserRepository.js";
+import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
 
 export class FindUserById {
   constructor(

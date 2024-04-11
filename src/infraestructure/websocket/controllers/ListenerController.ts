@@ -1,4 +1,4 @@
-import { Listener } from "@/application/websocket/Listener.js";
+import { Listener } from "../../../application/websocket/Listener.js";
 
 export class ListenerController {
     constructor(

@@ -1,7 +1,7 @@
-import type { IUserRepository } from "@/domain/interfaces/IUserRepository.js";
+import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
 import { PrismaClient } from "@prisma/client";
 import { ApolloError } from "apollo-server-express";
-import { User } from "@/domain/entities/User.js";
+import { User } from "../../domain/entities/User.js";
 export class UserPrismaRepository implements IUserRepository {
   private prisma: PrismaClient
   constructor() {

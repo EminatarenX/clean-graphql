@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { Room } from "@/domain/entities/Room";
-import type { IRoomRepository } from "@/domain/interfaces/IRoomRepository";
+import { Room } from "../../domain/entities/Room.js";
+import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository.js";
 
 export class RoomPrismaRepository implements IRoomRepository {
   private db: PrismaClient;

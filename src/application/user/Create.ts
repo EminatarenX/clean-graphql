@@ -1,6 +1,6 @@
-import type { IUserRepository } from "@/domain/interfaces/IUserRepository.js";
-import type { IBcryptRepository } from "@/domain/interfaces/IBcryptRepository.js";
-import { User } from "@/domain/entities/User.js";
+import type { IUserRepository } from "../../domain/interfaces/IUserRepository.js";
+import type { IBcryptRepository } from "../../domain/interfaces/IBcryptRepository.js";
+import { User } from "../../domain/entities/User.js";
 export class Create {
   constructor(
     private readonly userRepository: IUserRepository,
