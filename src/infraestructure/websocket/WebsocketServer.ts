@@ -30,7 +30,7 @@ export class WebSocketServer implements IWebsocketServer{
       this.io = new Server(this.server, {
         cors: {
           origin: [
-            "http://localhost:3000",
+            "http://44.223.113.235:3000",
             "https://www.bynvm.mx"
           ],
         },
