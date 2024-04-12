@@ -19,16 +19,9 @@ export class WebSocketServer implements IWebsocketServer{
 
       this.app = express();
       this.app.use(cors({
-        origin: [
-          "http://localhost:3000",
-          frontendUrl,
-        ]
+        origin: frontendUrl,
+        credentials: true,
       }));
-      this.app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", frontendUrl);
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        next();
-      })
       this.app.use(express.json());
       
       this.server = this.app.listen(4001, () => {
@@ -37,10 +30,8 @@ export class WebSocketServer implements IWebsocketServer{
 
       this.io = new Server(this.server, {
         cors: {
-          origin: [
-            "http://localhost:3000",
-            frontendUrl,
-          ],
+          origin: frontendUrl,
+          credentials: true,
         },
         pingTimeout: 60000,
       });
