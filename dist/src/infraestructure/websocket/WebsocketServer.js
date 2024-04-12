@@ -9,12 +9,15 @@ export class WebSocketServer {
     constructor() { }
     start() {
         if (!this.app) {
+            const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+            const frontendUrl2 = process.env.FRONTEND_URL_SEC || "http://localhost:3001";
             this.app = express();
             this.app.use(express.json());
             this.app.use(cors({
                 origin: [
                     "http://localhost:3000",
-                    "https://www.bynvm.mx"
+                    frontendUrl,
+                    frontendUrl2,
                 ]
             }));
             this.server = this.app.listen(4001, () => {
@@ -24,7 +27,8 @@ export class WebSocketServer {
                 cors: {
                     origin: [
                         "http://localhost:3000",
-                        "https://www.bynvm.mx"
+                        frontendUrl,
+                        frontendUrl2,
                     ],
                 },
                 pingTimeout: 60000,
