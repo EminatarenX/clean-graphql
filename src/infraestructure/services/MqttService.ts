@@ -11,7 +11,6 @@ export class MqttService implements IMqtt{
 
   constructor() {
     this.client = mqtt.connect(process.env.MQTT_URL || 'mqtt://localhost:1883')
-
   }
 
   start(){

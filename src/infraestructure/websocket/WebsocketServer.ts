@@ -16,18 +16,21 @@ export class WebSocketServer implements IWebsocketServer{
     if (!this.app) {
 
       const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
-      const frontendUrl2 = process.env.FRONTEND_URL_SEC || "http://localhost:3001";
 
       this.app = express();
-      this.app.use(express.json());
       this.app.use(cors({
         origin: [
           "http://localhost:3000",
           frontendUrl,
-          frontendUrl2,
         ]
       }));
-
+      this.app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", frontendUrl);
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+      })
+      this.app.use(express.json());
+      
       this.server = this.app.listen(4001, () => {
         console.log("Server is running on port 4001");
       });
@@ -37,7 +40,6 @@ export class WebSocketServer implements IWebsocketServer{
           origin: [
             "http://localhost:3000",
             frontendUrl,
-            frontendUrl2,
           ],
         },
         pingTimeout: 60000,
