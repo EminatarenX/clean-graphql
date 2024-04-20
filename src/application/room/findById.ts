@@ -1,11 +1,13 @@
 import type { IJWTRepository } from "../../domain/interfaces/IJWTRepository.js";
 import type { IRoomRepository } from "../../domain/interfaces/IRoomRepository.js";
 import type { IMqtt } from "../../domain/interfaces/IMqtt.js";
+import type { ISender } from "src/domain/interfaces/ISender.js";
 export class FindRoomById {
   constructor(
     private readonly roomRepository: IRoomRepository,
     private readonly jwtRepository: IJWTRepository,
-    private readonly mqttService: IMqtt
+    private readonly mqttService: IMqtt,
+    private readonly sender: ISender
   ) { }
 
   async run(id: string, token: string) {
